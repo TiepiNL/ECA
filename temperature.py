@@ -231,9 +231,14 @@ for key in tropical_days:
     #print("Total tropical days in {}: {}".format(key, tropical_days[key]))
     tropical_list.append(tropical_days[key])
 
+# Deduct the tropical days from the summer days count.
+summer_list_excl_tropical = []
+for i in summer_list:
+    summer_list_excl_tropical.append(summer_list[i] - tropical_list[i])
+
 unique_years = get_unique_years(max_dates)
 plotdata = pd.DataFrame({
-    "Summer": summer_list,
+    "Summer": summer_list_excl_tropical,
     "Tropical": tropical_list},
     index=unique_years)
 plotdata.plot(kind='bar', stacked=True, figsize=(15, 8))
